@@ -13,12 +13,16 @@ public class Main {
 
         for(int i = 2; i <= N; i++){
             if(A[i] == 0) continue;
-            if(A[i] >= M) System.out.println(A[i]);
             int step = 2;
             while(i * step <= N){
                 A[i * step] = 0;
                 step++;
             }
+        }
+        
+        for(int i = M; i <= N; i++){
+            if(A[i] == 0) continue;
+            System.out.println(A[i]);
         }
     }
 }

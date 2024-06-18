@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -25,16 +24,18 @@ public class Main {
 
             for (int j = 1; j < 20; j++) {
                 int currentNumber = Integer.parseInt(st.nextToken());
-
-                for(int k = 0; k < list.size(); k++) {
+                int listSize = list.size();
+                for(int k = 0; k < listSize; k++) {
                     if (list.get(k) > currentNumber) {
                         total += list.size() - k;
+                        list.add(k, currentNumber);
                         break;
                     }
                 }
 
-                list.add(currentNumber);
-                Collections.sort(list);
+                if (listSize == list.size()) {
+                    list.add(currentNumber);
+                }
             }
 
             bw.write(String.format(RESULT, mainNumber, total));

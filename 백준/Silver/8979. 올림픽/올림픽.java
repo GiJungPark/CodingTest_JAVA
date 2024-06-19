@@ -28,7 +28,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             if (Arr[i].num == M) {
                 int num = i;
-                while (checkBefore(Arr, num)) {
+                while (num > 1 && checkBefore(Arr, num)) {
                     num--;
                 }
 
@@ -70,11 +70,11 @@ public class Main {
         public int compareTo(Rank o) {
             if (this.gold == o.gold) {
                 if (this.silver == o.silver) {
-                    return this.bronze - o.bronze;
+                    return o.bronze - this.bronze;
                 }
-                return this.silver - o.silver;
+                return o.silver - this.silver;
             }
-            return this.gold - o.gold;
+            return o.gold - this.gold;
         }
     }
 }

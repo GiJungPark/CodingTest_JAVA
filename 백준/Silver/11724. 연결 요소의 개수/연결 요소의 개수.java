@@ -1,44 +1,58 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import static java.lang.Integer.parseInt;
+
 public class Main {
-    static ArrayList<Integer>[] A;
-    static boolean[] visited;
+    private static ArrayList<Integer>[] list;
+    private static boolean[] visited;
+    private static int count = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        int node = parseInt(st.nextToken());
+        int edge = parseInt(st.nextToken());
 
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        A = new ArrayList[N + 1];
-        visited = new boolean[N + 1];
-        for (int i = 1; i <= N; i++) {
-            A[i] = new ArrayList<Integer>();
+        list = new ArrayList[node + 1];
+        visited = new boolean[node + 1];
+        for (int i = 1; i <= node; i++) {
+            list[i] = new ArrayList<>();
+            visited[i] = false;
         }
 
-        for (int i = 0; i < M; i++) {
+        for (int i = 0; i < edge; i++) {
             st = new StringTokenizer(br.readLine());
-            int s = Integer.parseInt(st.nextToken());
-            int e = Integer.parseInt(st.nextToken());
-            A[s].add(e);
-            A[e].add(s);
+            int s = parseInt(st.nextToken());
+            int e = parseInt(st.nextToken());
+            list[s].add(e);
+            list[e].add(s);
         }
-        int count = 0;
-        for (int i = 1; i <= N; i++) {
+
+        for (int i = 1; i <= node; i++) {
             if (!visited[i]) {
-                count++;
                 DFS(i);
+                count++;
             }
         }
+
         System.out.println(count);
     }
-    static void DFS(int v){
-        if(visited[v]) return;
-        visited[v] = true;
-        for(int i : A[v]){
-            if(visited[i] == false) DFS(i);
+
+    public static void DFS(int s) {
+        if (visited[s]) {
+            return;
+        }
+
+        visited[s] = true;
+
+        for (int value : list[s]) {
+            if (!visited[value]) {
+                DFS(value);
+            }
         }
     }
 }

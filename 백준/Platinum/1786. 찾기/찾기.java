@@ -49,7 +49,7 @@ public class Main {
 
         int j = 0;
         for (int i = 0; i < parentSize; i++) {
-            if (j > 0 && parent.charAt(i) != pattern.charAt(j)) {
+            while (j > 0 && parent.charAt(i) != pattern.charAt(j)) {
                 j = table[j - 1];
             }
 
